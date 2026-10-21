@@ -56,7 +56,6 @@ function criarApp({ service }) {
 
   app.use((_req, res) => res.status(404).json({ erro: 'Rota não encontrada' }));
 
-  // eslint-disable-next-line no-unused-vars
   app.use((erro, _req, res, _next) => {
     if (erro.type === 'entity.parse.failed') {
       return res.status(400).json({ erro: 'JSON malformado' });
