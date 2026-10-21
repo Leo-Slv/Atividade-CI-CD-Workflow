@@ -1,3 +1,5 @@
+import './globals.css';
+
 export const metadata = {
   title: 'CRUD de Pessoas',
   description: 'Cadastro de pessoas com CPF, nome, data de nascimento e idade',
