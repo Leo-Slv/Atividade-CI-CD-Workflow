@@ -1,0 +1,37 @@
+$ $HOME/withpg.sh 'npm run test:coverage 2>&1 | tail -40'
+
+> crud-pessoas-api@1.0.0 test:coverage
+> jest --runInBand --coverage
+
+PASS tests/integration/pessoas.api.test.js
+PASS tests/unit/idade.test.js
+PASS tests/unit/pessoaService.test.js
+PASS tests/unit/cpf.test.js
+--------------------------|---------|----------|---------|---------|-------------------
+File                      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+--------------------------|---------|----------|---------|---------|-------------------
+All files                 |   96.49 |    89.55 |     100 |   97.29 |                   
+ src                      |   95.34 |    83.33 |     100 |   94.73 |                   
+  app.js                  |   94.44 |       75 |     100 |   93.54 | 67-68             
+  errors.js               |     100 |      100 |     100 |     100 |                   
+ src/db                   |     100 |      100 |     100 |     100 |                   
+  migrate.js              |     100 |      100 |     100 |     100 |                   
+  pool.js                 |     100 |      100 |     100 |     100 |                   
+ src/domain               |     100 |    97.05 |     100 |     100 |                   
+  cpf.js                  |     100 |      100 |     100 |     100 |                   
+  idade.js                |     100 |    95.83 |     100 |     100 | 34                
+ src/repositories         |   84.21 |       50 |     100 |   88.88 |                   
+  pessoaRepository.js     |   84.21 |       50 |     100 |   88.88 | 28-29             
+ src/services             |     100 |    94.11 |     100 |     100 |                   
+  pessoaService.js        |     100 |    94.11 |     100 |     100 | 68                
+ tests/helpers            |   92.85 |       75 |     100 |     100 |                   
+  repositorioEmMemoria.js |   92.85 |       75 |     100 |     100 | 17                
+--------------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 4 passed, 4 total
+Tests:       72 passed, 72 total
+Snapshots:   0 total
+Time:        1.068 s, estimated 2 s
+Ran all test suites.
+[exit code: 0]
+

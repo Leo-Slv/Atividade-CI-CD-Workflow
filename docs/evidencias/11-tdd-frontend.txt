@@ -1,0 +1,59 @@
+$ npx jest 2>&1 | head -20
+FAIL tests/api.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../lib/api' from 'tests/api.test.js'
+
+      3 | function respostaJson(status, corpo) {
+      4 |   return {
+    > 5 |     ok: status >= 200 && status < 300,
+        |              ^
+      6 |     status,
+      7 |     json: async () => corpo,
+      8 |   };
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.<anonymous> (tests/api.test.js:5:14)
+
+FAIL tests/format.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../lib/format' from 'tests/format.test.js'
+[exit code: 0]
+
+$ npx jest tests/format.test.js 2>&1 | tail -30
+PASS tests/format.test.js
+  mascararCPF
+    ✓ mascara progressivamente "" -> "" (7 ms)
+    ✓ mascara progressivamente "5" -> "5"
+    ✓ mascara progressivamente "529" -> "529" (1 ms)
+    ✓ mascara progressivamente "5299" -> "529.9"
+    ✓ mascara progressivamente "529982" -> "529.982" (1 ms)
+    ✓ mascara progressivamente "5299822" -> "529.982.2"
+    ✓ mascara progressivamente "529982247" -> "529.982.247"
+    ✓ mascara progressivamente "5299822472" -> "529.982.247-2" (1 ms)
+    ✓ mascara progressivamente "52998224725" -> "529.982.247-25" (1 ms)
+    ✓ ignora caracteres não numéricos e limita a 11 dígitos
+    ✓ tolera valores nulos (1 ms)
+  formatarData
+    ✓ converte AAAA-MM-DD para DD/MM/AAAA
+    ✓ devolve vazio para valor ausente (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       13 passed, 13 total
+Snapshots:   0 total
+Time:        0.203 s
+Ran all test suites matching tests/format.test.js.
+[exit code: 0]
+
+$ npx jest 2>&1 | tail -40
+PASS tests/api.test.js
+PASS tests/format.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       19 passed, 19 total
+Snapshots:   0 total
+Time:        0.252 s, estimated 1 s
+Ran all test suites.
+[exit code: 0]
+

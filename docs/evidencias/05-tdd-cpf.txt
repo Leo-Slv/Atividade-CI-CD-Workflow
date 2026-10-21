@@ -1,0 +1,48 @@
+$ npx jest tests/unit/cpf.test.js 2>&1 | head -12
+FAIL tests/unit/cpf.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../../src/domain/cpf' from 'tests/unit/cpf.test.js'
+
+    > 1 | const { validarCPF, normalizarCPF, formatarCPF } = require('../../src/domain/cpf');
+        |                                                    ^
+      2 |
+      3 | describe('normalizarCPF', () => {
+      4 |   it('remove pontos e traço', () => {
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+[exit code: 0]
+
+$ npx jest tests/unit/cpf.test.js 2>&1 | tail -40
+PASS tests/unit/cpf.test.js
+  normalizarCPF
+    ✓ remove pontos e traço (2 ms)
+    ✓ mantém apenas dígitos (1 ms)
+    ✓ retorna string vazia para valores não textuais (1 ms)
+  validarCPF
+    ✓ aceita CPF válido (529.982.247-25) (1 ms)
+    ✓ aceita CPF válido (52998224725) (1 ms)
+    ✓ aceita CPF válido (111.444.777-35)
+    ✓ aceita CPF válido (11144477735) (1 ms)
+    ✓ rejeita CPF com dígito verificador incorreto
+    ✓ rejeita sequências de dígitos repetidos (00000000000)
+    ✓ rejeita sequências de dígitos repetidos (11111111111) (1 ms)
+    ✓ rejeita sequências de dígitos repetidos (99999999999)
+    ✓ rejeita formato inválido ("")
+    ✓ rejeita formato inválido ("123")
+    ✓ rejeita formato inválido ("1234567890") (1 ms)
+    ✓ rejeita formato inválido ("123456789012")
+    ✓ rejeita formato inválido ("abcdefghijk") (1 ms)
+    ✓ rejeita formato inválido (null)
+    ✓ rejeita formato inválido (undefined)
+    ✓ rejeita formato inválido (12345678909)
+  formatarCPF
+    ✓ aplica a máscara 000.000.000-00 (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       20 passed, 20 total
+Snapshots:   0 total
+Time:        0.351 s
+Ran all test suites matching tests/unit/cpf.test.js.
+[exit code: 0]
+

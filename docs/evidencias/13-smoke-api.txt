@@ -1,0 +1,13 @@
+$ $HOME/withpg.sh 'DATABASE_URL=$DATABASE_URL $HOME/smoke.sh'
+# criar
+{"cpf":"52998224725","nome":"Ana Souza","dataNascimento":"1990-05-10","idade":36}
+# listar
+[{"cpf":"52998224725","nome":"Ana Souza","dataNascimento":"1990-05-10","idade":36}]
+# atualizar
+{"cpf":"52998224725","nome":"Ana Maria Souza","dataNascimento":"1991-06-11","idade":35}
+# CPF inválido
+HTTP/1.1 400 Bad Request
+{"erro":"CPF inválido"}# excluir
+HTTP 204
+[exit code: 0]
+

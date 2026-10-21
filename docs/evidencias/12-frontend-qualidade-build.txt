@@ -1,0 +1,44 @@
+$ npm run lint 2>&1
+
+> crud-pessoas-web@1.0.0 lint
+> eslint .
+
+[exit code: 0]
+
+$ npm run format:check 2>&1
+
+> crud-pessoas-web@1.0.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+[exit code: 0]
+
+$ npm run build 2>&1 | tail -25
+
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.mjs took 21ms
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 4.2s
+  Running TypeScript ...
+  Finished TypeScript in 1ms ...
+  Collecting page data using 1 worker ...
+  Generating static pages using 1 worker (0/3) ...
+✓ Generating static pages using 1 worker (3/3) in 173ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+└ ○ /_not-found
+
+
+○  (Static)  prerendered as static content
+
+[exit code: 0]
+

@@ -1,0 +1,12 @@
+$ git status --short && git branch --show-current
+?? .editorconfig
+?? .gitignore
+?? README.md
+main
+[exit code: 0]
+
+$ git log --oneline
+8dd52e7 docs: adiciona README inicial do projeto
+67449ce chore: adiciona .gitignore e .editorconfig
+[exit code: 0]
+

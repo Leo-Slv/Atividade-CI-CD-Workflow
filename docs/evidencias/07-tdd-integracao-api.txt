@@ -1,0 +1,49 @@
+$ DATABASE_URL=postgres://postgres:postgres@localhost:54329/crud_test npx jest tests/integration 2>&1 | head -12
+FAIL tests/integration/pessoas.api.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../../src/db/pool' from 'tests/integration/pessoas.api.test.js'
+
+      1 | const request = require('supertest');
+    > 2 | const { criarPool } = require('../../src/db/pool');
+        |                       ^
+      3 | const { migrar } = require('../../src/db/migrate');
+      4 | const { criarPessoaRepository } = require('../../src/repositories/pessoaRepository');
+      5 | const { criarPessoaService } = require('../../src/services/pessoaService');
+
+[exit code: 0]
+
+$ $HOME/withpg.sh 'npx jest tests/integration 2>&1 | tail -50'
+PASS tests/integration/pessoas.api.test.js
+  API /pessoas (integração com PostgreSQL)
+    ✓ responde 404 em JSON para rotas desconhecidas (17 ms)
+    GET /health
+      ✓ informa que a API e o banco estão no ar (21 ms)
+    POST /pessoas
+      ✓ cadastra a pessoa, grava no banco e devolve a idade calculada (24 ms)
+      ✓ responde 400 para CPF inválido (11 ms)
+      ✓ responde 400 para data de nascimento futura (11 ms)
+      ✓ responde 400 para JSON malformado (7 ms)
+      ✓ responde 409 para CPF já cadastrado (10 ms)
+    GET /pessoas
+      ✓ lista as pessoas ordenadas por nome (25 ms)
+      ✓ devolve lista vazia sem registros (5 ms)
+    GET /pessoas/:cpf
+      ✓ busca por CPF (9 ms)
+      ✓ responde 404 quando não existe (7 ms)
+      ✓ responde 400 para CPF inválido (6 ms)
+    PUT /pessoas/:cpf
+      ✓ atualiza nome e data de nascimento (13 ms)
+      ✓ responde 404 ao atualizar quem não existe (7 ms)
+      ✓ responde 400 para dados inválidos (8 ms)
+    DELETE /pessoas/:cpf
+      ✓ remove a pessoa e responde 204 (9 ms)
+      ✓ responde 404 ao remover quem não existe (5 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       17 passed, 17 total
+Snapshots:   0 total
+Time:        0.499 s, estimated 1 s
+Ran all test suites matching tests/integration.
+[exit code: 0]
+

@@ -1,0 +1,36 @@
+$ npm run lint 2>&1
+
+> crud-pessoas-api@1.0.0 lint
+> eslint .
+
+
+/sessions/rcw-018k2gnmkejctyi3kzvqqqbx/work/Atividade-CI-CD-Workflow/backend/src/app.js
+  59:3  warning  Unused eslint-disable directive (no problems were reported from 'no-unused-vars')
+
+✖ 1 problem (0 errors, 1 warning)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+[exit code: 0]
+
+$ npm run format:check 2>&1
+
+> crud-pessoas-api@1.0.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+[exit code: 0]
+
+$ npm run lint 2>&1 && npm run format:check 2>&1
+
+> crud-pessoas-api@1.0.0 lint
+> eslint .
+
+
+> crud-pessoas-api@1.0.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+[exit code: 0]
+

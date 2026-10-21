@@ -1,0 +1,13 @@
+$ npm install next@15 react@19 react-dom@19 2>&1 | tail -3
+  npm audit fix --force
+
+Run `npm audit` for details.
+[exit code: 0]
+
+$ npm install next@16 react@19 react-dom@19 (next 16 corrige vulnerabilidade de postcss do next 15)
+next@16 instalado.
+
+$ git status --short
+?? frontend/
+[exit code: 0]
+

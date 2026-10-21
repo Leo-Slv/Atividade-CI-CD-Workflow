@@ -1,0 +1,91 @@
+$ git branch -a && git status --short | wc -l
+* feature/crud-pessoa
+  main
+0
+[exit code: 0]
+
+$ git log --graph --oneline --decorate --all
+* a050aa9 (HEAD -> feature/crud-pessoa) docs: adiciona descrição do Pull Request
+* 1273ab0 docs: documenta arquitetura, execução, testes, TDD e CI no README
+* f1a3c90 style: padroniza docker-compose.yml com Prettier
+* afde158 ci: adiciona pipeline GitHub Actions (lint, formatação, testes unitários e de integração, build das imagens)
+* e8f8fd9 build: adiciona docker-compose com PostgreSQL, API e frontend
+* 8c88a3d build(frontend): adiciona Dockerfile multi-stage do Next.js
+* 0360738 build(backend): adiciona Dockerfile da API
+* 3791825 style(frontend): adiciona estilos globais da interface
+* d491a3e feat(frontend): adiciona página de CRUD de pessoas (formulário, listagem e idade)
+* a8f208c feat(frontend): [GREEN] implementa cliente HTTP da API de pessoas
+* 0037ee2 feat(frontend): [GREEN] implementa máscara de CPF e formatação de data
+* c780add test(frontend): [RED] adiciona testes de máscara/formatação e cliente da API
+* e8a19d5 feat(frontend): adiciona layout raiz do Next.js (App Router)
+* 638fbf1 chore(frontend): adiciona ESLint (análise estática) e Prettier (formatação)
+* 8df63a0 chore(frontend): inicializa projeto Next.js com Jest
+* 77aa416 chore(backend): configura Jest para medir cobertura apenas do código em src
+* b9a2e90 feat(api): adiciona entrypoint do servidor e .env.example
+* 0c6aacf refactor(api): remove diretiva eslint-disable desnecessária
+* f7afed4 feat(api): [GREEN] implementa rotas REST do CRUD de pessoas
+* 4506889 feat(db): adiciona pool, migração e repositório PostgreSQL de pessoas
+* 8cd8f58 test(api): [RED] adiciona testes de integração da API com PostgreSQL
+* 4a730c0 feat(service): [GREEN] implementa regras de negócio do CRUD de pessoas
+* 1600c97 test(service): [RED] adiciona testes do CRUD de pessoas (repositório em memória)
+* 5817304 feat(domain): [GREEN] implementa validação e formatação de CPF
+* 2bec6dd test(domain): [RED] adiciona testes de validação e formatação de CPF
+* 27e0b33 feat(domain): [GREEN] implementa cálculo de idade
+* b7e5544 test(domain): [RED] adiciona testes do cálculo de idade
+* 9e197de (main) chore(backend): adiciona Prettier (formatação) e atualiza dependências de desenvolvimento
+* e7be187 chore(backend): adiciona ESLint (análise estática) com regras de qualidade
+* d596c89 chore(backend): inicializa projeto Express com Jest e Supertest
+* 8dd52e7 docs: adiciona README inicial do projeto
+* 67449ce chore: adiciona .gitignore e .editorconfig
+[exit code: 0]
+
+$ npm run lint 2>&1 | tail -4 && npm run format:check 2>&1 | tail -2
+
+> crud-pessoas-api@1.0.0 lint
+> eslint .
+
+Checking formatting...
+All matched files use Prettier code style!
+[exit code: 0]
+
+$ npm run test:unit 2>&1 | tail -8
+PASS tests/unit/cpf.test.js
+PASS tests/unit/idade.test.js
+
+Test Suites: 3 passed, 3 total
+Tests:       55 passed, 55 total
+Snapshots:   0 total
+Time:        0.553 s
+Ran all test suites matching tests/unit.
+[exit code: 0]
+
+$ $HOME/withpg.sh 'npm run test:integration 2>&1 | tail -8'
+      ✓ remove a pessoa e responde 204 (14 ms)
+      ✓ responde 404 ao remover quem não existe (9 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       17 passed, 17 total
+Snapshots:   0 total
+Time:        0.66 s
+Ran all test suites matching tests/integration.
+[exit code: 0]
+
+$ npm run lint 2>&1 | tail -3 && npm run format:check 2>&1 | tail -2
+> crud-pessoas-web@1.0.0 lint
+> eslint .
+
+Checking formatting...
+All matched files use Prettier code style!
+[exit code: 0]
+
+$ npm test 2>&1 | tail -8
+PASS tests/api.test.js
+PASS tests/format.test.js
+
+Test Suites: 2 passed, 2 total
+Tests:       19 passed, 19 total
+Snapshots:   0 total
+Time:        0.225 s, estimated 1 s
+Ran all test suites.
+[exit code: 0]
+

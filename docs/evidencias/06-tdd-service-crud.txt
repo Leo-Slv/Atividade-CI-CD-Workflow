@@ -1,0 +1,51 @@
+$ npx jest tests/unit/pessoaService.test.js 2>&1 | head -12
+FAIL tests/unit/pessoaService.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../../src/services/pessoaService' from 'tests/unit/pessoaService.test.js'
+
+    > 1 | const { criarPessoaService } = require('../../src/services/pessoaService');
+        |                                ^
+      2 | const { ValidationError, NotFoundError, ConflictError } = require('../../src/errors');
+      3 | const { criarRepositorioEmMemoria } = require('../helpers/repositorioEmMemoria');
+      4 |
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+[exit code: 0]
+
+$ npx jest tests/unit/pessoaService.test.js 2>&1 | tail -45
+PASS tests/unit/pessoaService.test.js
+  pessoaService.criar
+    ✓ cria a pessoa, normaliza o CPF e calcula a idade (3 ms)
+    ✓ rejeita CPF inválido (2 ms)
+    ✓ rejeita nome inválido (undefined) (1 ms)
+    ✓ rejeita nome inválido ("") (1 ms)
+    ✓ rejeita nome inválido ("   ") (5 ms)
+    ✓ rejeita nome inválido ("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    ✓ rejeita data de nascimento inválida ("31/12/1990") (1 ms)
+    ✓ rejeita data de nascimento inválida ("1990-02-30") (1 ms)
+    ✓ rejeita data de nascimento inválida ("2999-01-01") (1 ms)
+    ✓ rejeita data de nascimento inválida (undefined) (1 ms)
+    ✓ rejeita CPF já cadastrado
+  pessoaService.listar
+    ✓ retorna todas as pessoas ordenadas por nome, com idade (5 ms)
+    ✓ retorna lista vazia quando não há registros
+  pessoaService.buscar
+    ✓ encontra pela CPF com ou sem máscara
+    ✓ lança NotFoundError quando não existe (1 ms)
+    ✓ lança ValidationError para CPF inválido
+  pessoaService.atualizar
+    ✓ atualiza nome e data de nascimento e recalcula a idade (1 ms)
+    ✓ lança NotFoundError ao atualizar quem não existe
+    ✓ valida os dados na atualização (1 ms)
+  pessoaService.remover
+    ✓ remove a pessoa existente
+    ✓ lança NotFoundError ao remover quem não existe (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       21 passed, 21 total
+Snapshots:   0 total
+Time:        0.318 s
+Ran all test suites matching tests/unit/pessoaService.test.js.
+[exit code: 0]
+

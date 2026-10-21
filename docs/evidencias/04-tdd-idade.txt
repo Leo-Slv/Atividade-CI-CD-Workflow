@@ -1,0 +1,47 @@
+$ npx jest tests/unit/idade.test.js 2>&1 | head -25
+FAIL tests/unit/idade.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../../src/domain/idade' from 'tests/unit/idade.test.js'
+
+    > 1 | const { calcularIdade } = require('../../src/domain/idade');
+        |                           ^
+      2 |
+      3 | describe('calcularIdade', () => {
+      4 |   const hoje = new Date(2026, 9, 21); // 21/10/2026
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:1031:11)
+      at Object.require (tests/unit/idade.test.js:1:27)
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        0.286 s
+Ran all test suites matching tests/unit/idade.test.js.
+[exit code: 0]
+
+$ npx jest tests/unit/idade.test.js 2>&1 | head -30
+PASS tests/unit/idade.test.js
+  calcularIdade
+    ✓ calcula a idade quando o aniversário já ocorreu no ano (2 ms)
+    ✓ calcula a idade quando o aniversário ainda não ocorreu no ano (1 ms)
+    ✓ conta o aniversário no próprio dia
+    ✓ não completa o ano um dia antes do aniversário (1 ms)
+    ✓ retorna 0 para quem nasceu há menos de um ano (1 ms)
+    ✓ trata corretamente nascidos em 29/02 (ano bissexto)
+    ✓ lança erro para data futura (3 ms)
+    ✓ lança erro para data inválida ("") (1 ms)
+    ✓ lança erro para data inválida ("abc") (1 ms)
+    ✓ lança erro para data inválida ("2000-13-01") (1 ms)
+    ✓ lança erro para data inválida ("2001-02-29") (1 ms)
+    ✓ lança erro para data inválida ("15/03/2000") (1 ms)
+    ✓ lança erro para data inválida (null) (1 ms)
+    ✓ lança erro para data inválida (undefined) (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       14 passed, 14 total
+Snapshots:   0 total
+Time:        0.521 s
+Ran all test suites matching tests/unit/idade.test.js.
+[exit code: 0]
+
